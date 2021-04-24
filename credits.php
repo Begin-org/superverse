@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +9,8 @@
 
 </head>
 <body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="imgs/logo-superverse2.png" class="logo-navbar">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <a class="nav-link" aria-current="page" href="home.php">Página Inicial</a>
-                <a class="nav-link" href="history.php">Histórico</a>
-                <a class="nav-link active" href="credits.php">Créditos</a>
-                <button class="button button-login-logout">SAIR</button>
-            </div>
-        </div>
-    </nav>
+    <?php include("topbar.php"); ?>
+    
     <div class="container-credits">
         <p class="col-12 background-credit">Esse site foi construído utilizando os dados da <a class="links-credits" target="_blank" href="https://superheroapi.com/"> Superhero API</a></p>
         
