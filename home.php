@@ -50,69 +50,9 @@
             </button>
         </p>
         <div class="container-characteres-home col-12 col-md-8">
-            <div class="col-12 col-md-6 col-lg-4 ps-2">
-                <div class="container-character-home p-3">
-                    <img src="https://www.superherodb.com/pictures2/portraits/10/100/10060.jpg">
-                    <div class="data-character">
-                        <span class="name-character-home">A-Bomb</span>
-                        <span class="origin-character-home">Marvel Comics</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 ps-2">
-                <div class="container-character-home p-3">
-                    <img src="https://www.superherodb.com/pictures2/portraits/10/100/10060.jpg">
-                    <div class="data-character">
-                        <span class="name-character-home">A-Bomb</span>
-                        <span class="origin-character-home">Marvel Comics</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 ps-2">
-                <div class="container-character-home p-3">
-                    <img src="https://www.superherodb.com/pictures2/portraits/10/100/10060.jpg">
-                    <div class="data-character">
-                        <span class="name-character-home">A-Bomb</span>
-                        <span class="origin-character-home">Marvel Comics</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 ps-2">
-                <div class="container-character-home p-3">
-                    <img src="https://www.superherodb.com/pictures2/portraits/10/100/10060.jpg">
-                    <div class="data-character">
-                        <span class="name-character-home">A-Bomb</span>
-                        <span class="origin-character-home">Marvel Comics</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 ps-2">
-                <div class="container-character-home p-3">
-                    <img src="https://www.superherodb.com/pictures2/portraits/10/100/10060.jpg">
-                    <div class="data-character">
-                        <span class="name-character-home">A-Bomb</span>
-                        <span class="origin-character-home">Marvel Comics</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 ps-2">
-                <div class="container-character-home p-3">
-                    <img src="https://www.superherodb.com/pictures2/portraits/10/100/10060.jpg">
-                    <div class="data-character">
-                        <span class="name-character-home">A-Bomb</span>
-                        <span class="origin-character-home">Marvel Comics</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 ps-2">
-                <div class="container-character-home p-3">
-                    <img src="https://www.superherodb.com/pictures2/portraits/10/100/10060.jpg">
-                    <div class="data-character">
-                        <span class="name-character-home">A-Bomb</span>
-                        <span class="origin-character-home">Marvel Comics</span>
-                    </div>
-                </div>
-            </div>
+
+            <div class="loader"></div>
+
         </div>
         <div class="container-skills col-12 col-md-4 mb-2">
             <p class="text">Selecione uma habilidade</p>
@@ -150,14 +90,39 @@
   src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"></script>
+  <script src="js/requestsToSuperHeroApi.js"></script>
 
     <script>
+
     function modalVs(){
         $("#modal-vs").modal("show");
     }
+
+    getListOfCharacters(700).then((data) => {
+        let content = '';
+        
+        data.forEach(function(hero){
+
+           content += '<div class="col-12 col-md-6 col-lg-4 ps-2">' +
+                '<div class="container-character-home p-3" id="'+hero.characterId+'">' +
+                    '<img src="'+hero.characterImage+'">' +
+                    '<div class="data-character">' +
+                        '<span class="name-character-home">'+hero.characterName+'</span>' +
+                        '<span class="origin-character-home">'+hero.publisher+'</span>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+        });
+
+        $(".container-characteres-home").html(content);
+        $(".loader").remove();
+        
+
+    }).catch(err => console.log(err));
+
        
     </script>
 
-    <script src="js/requestsToSuperHeroApi.js"></script>
+    
 </body>
 </html>

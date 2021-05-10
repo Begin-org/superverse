@@ -3,17 +3,13 @@
 
 require_once "../dao/CharactersDAO.php";
 require_once "../model/Character.php";
-
-DEFINE("NO_RESULTS_FOR_THIS_SEARCH", 0);
-DEFINE("SUCCESSUFUL_SEARCH", 1);
-DEFINE("INVALID_PARAMETERS_IN_SEARCH", 2);
+require_once "../utils/responseConstants.php";
 
 
-if (isset($_GET['listBegin']) && !empty($_GET['listBegin']) &&
-    isset($_GET['listLimit']) && !empty($_GET['listBegin']) ) {
+if (isset($_GET['listLimit']) && !empty($_GET['listLimit']) ) {
 
     $characterDao = new CharacterDAO();
-    $response = $characterDao->getListCharacters($_GET['listBegin'], $_GET['listLimit']);
+    $response = $characterDao->getListCharacters($_GET['listLimit']);
 
     if ($response != false) {
         

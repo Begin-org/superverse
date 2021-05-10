@@ -2,9 +2,8 @@
 
 require_once "../dao/CharactersDAO.php";
 require_once "../model/Character.php";
+require_once "../utils/responseConstants.php";
 
-DEFINE("ERROR_IN_SEARCH", 0);
-DEFINE("SUCCESSUFUL_SEARCH", 1);
 
 $characterDao = new CharacterDAO();
 $response = $characterDao->getRandomCharacter();

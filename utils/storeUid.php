@@ -10,4 +10,3 @@
     }
 
     echo json_encode("Stored");
-?>

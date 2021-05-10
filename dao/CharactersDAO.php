@@ -6,6 +6,24 @@ require_once "../model/Character.php";
 class CharacterDAO
 {
 
+    public function read($response)
+    {
+        $character = new Character();
+
+        $character->setCharacterId($response->id);
+        $character->setCharacterName($response->name);
+        $character->setCharacterIntelligence($response->powerstats->intelligence);
+        $character->setCharacterStrength($response->powerstats->strength);
+        $character->setCharacterSpeed($response->powerstats->speed);
+        $character->setCharacterDurability($response->powerstats->durability);
+        $character->setCharacterPower($response->powerstats->power);
+        $character->setCharacterCombat($response->powerstats->combat);
+        $character->setCharacterImage($response->image->url);
+        $character->setPublisher($response->biography->publisher);
+
+        return $character;
+    }
+
     public function getCharactersByName($nameOfTheCharacter)
     {
         $url = $this->getUrlApi() . "search/" . $nameOfTheCharacter;
@@ -19,19 +37,7 @@ class CharacterDAO
 
             foreach ($response->results as $result) {
 
-                $character = new Character();
-
-                $character->setCharacterId($result->id);
-                $character->setCharacterName($result->name);
-                $character->setCharacterIntelligence($result->powerstats->intelligence);
-                $character->setCharacterStrength($result->powerstats->strength);
-                $character->setCharacterSpeed($result->powerstats->speed);
-                $character->setCharacterDurability($result->powerstats->durability);
-                $character->setCharacterPower($result->powerstats->power);
-                $character->setCharacterCombat($result->powerstats->combat);
-                $character->setCharacterImage($result->image->url);
-
-                $arrayOfCharacters[] = $character;
+                $arrayOfCharacters[] = $this->read($result);
             }
 
             return $arrayOfCharacters;
@@ -50,19 +56,7 @@ class CharacterDAO
 
         if ($response != false && $response->response == "success") {
 
-            $character = new Character();
-
-            $character->setCharacterId($response->id);
-            $character->setCharacterName($response->name);
-            $character->setCharacterIntelligence($response->powerstats->intelligence);
-            $character->setCharacterStrength($response->powerstats->strength);
-            $character->setCharacterSpeed($response->powerstats->speed);
-            $character->setCharacterDurability($response->powerstats->durability);
-            $character->setCharacterPower($response->powerstats->power);
-            $character->setCharacterCombat($response->powerstats->combat);
-            $character->setCharacterImage($response->image->url);
-
-            return $character;
+            return $this->read($response);
         } else {
             return false;
         }
@@ -79,28 +73,42 @@ class CharacterDAO
         return $this->getCharacterById($selectedId);
     }
 
-    public function getListCharacters($begin, $limit)
+    public function getListCharacters($limit)
     {
+        /*$favorite_heroes = [
+            30, 38, 60, 63, 69, 76, 97, 106, 112, 149, 194, 201, 204, 213, 216, 226,
+            233, 263, 278, 280, 298, 306, 309, 332, 346, 356, 367, 368, 370, 405, 423, 432, 441, 443, 491, 514, 528,
+            536, 538, 542, 546, 561, 569, 576, 579, 620, 632, 637, 643, 644, 654, 655, 659, 675, 678,
+            687, 717, 719, 730
+        ];*/
+
+        $url = $this->getUrlApi() . "search/a";
+        $curl = CurlDAO::getCurl($url);
+
+        $response = json_decode(curl_exec($curl));
+
 
         $listCharacters = [];
 
-        for ($i = $begin; $i <= $begin + $limit; $i++) {
-            
-            $result = $this->getCharacterById($i);
-            
-            if ( $result != false) {
-                
-                $listCharacters[] = $result;
+        if ($response != false && $response->response == "success") {
 
-            } else {
-                break;
+            shuffle($response->results);
+
+            foreach ($response->results as $result) {
+                /*if (in_array($result->id, $favorite_heroes)) {
+                    array_push($listCharacters, $this->read($result));
+                }*/
+
+                array_push($listCharacters, $this->read($result));
+
+                if (count($listCharacters) == $limit) {
+                    break;
+                }
             }
         }
 
         if (count($listCharacters) > 0) {
-            
             return $listCharacters;
-
         } else {
             return false;
         }

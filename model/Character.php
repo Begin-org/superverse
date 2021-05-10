@@ -11,6 +11,7 @@ class Character {
     private $characterDurability;
     private $characterPower;
     private $characterCombat;
+    private $publisher;
 
    
     public function getCharacterId()
@@ -126,6 +127,18 @@ class Character {
         return $this;
     }
 
+    public function getPublisher()
+    {
+        return $this->publisher;
+    }
+ 
+    public function setPublisher($publisher)
+    {
+        $this->publisher = $publisher;
+
+        return $this;
+    }
+
     public static function convertArrayOfCharactersToAssociativeArray($arrayOfCharacters) {
 
         $associativeArray = [];
@@ -137,6 +150,7 @@ class Character {
             $characterAttributes["characterId"] = $character->getCharacterId();
             $characterAttributes["characterName"] = $character->getCharacterName();
             $characterAttributes["characterImage"] = $character->getCharacterImage();
+            $characterAttributes["publisher"] = $character->getPublisher();
             $characterAttributes["characterIntelligence"] = ($character->getCharacterIntelligence() != "null") ? $character->getCharacterIntelligence() : 0;
             $characterAttributes["characterStrength"] = ($character->getCharacterStrength() != "null" ) ? $character->getCharacterStrength(): 0;
             $characterAttributes["characterSpeed"] = ($character->getCharacterSpeed() != "null") ? $character->getCharacterSpeed() : 0;
@@ -158,6 +172,7 @@ class Character {
         $characterAttributes["characterId"] = $character->getCharacterId();
         $characterAttributes["characterName"] = $character->getCharacterName();
         $characterAttributes["characterImage"] = $character->getCharacterImage();
+        $characterAttributes["publisher"] = $character->getPublisher();
         $characterAttributes["characterIntelligence"] = ($character->getCharacterIntelligence() != "null") ? $character->getCharacterIntelligence() : 0;
         $characterAttributes["characterStrength"] = ($character->getCharacterStrength() != "null" ) ? $character->getCharacterStrength(): 0;
         $characterAttributes["characterSpeed"] = ($character->getCharacterSpeed() != "null") ? $character->getCharacterSpeed() : 0;

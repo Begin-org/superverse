@@ -149,7 +149,7 @@ $("#login-google").click(function() {
             var user = result.user;
 
             $.ajax({
-                url: "store-uid.php",
+                url: "utils/storeUid.php",
                 method: "POST",
                 data: { uid : user.uid },
                 dataType: "json"
