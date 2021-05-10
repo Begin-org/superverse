@@ -157,5 +157,7 @@
     }
        
     </script>
+
+    <script src="js/requestsToSuperHeroApi.js"></script>
 </body>
 </html>
