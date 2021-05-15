@@ -267,6 +267,16 @@ body {
     margin-bottom: 10px;
 }
 
+.container-character-home:hover{
+    background-color: #4e4369;
+    cursor: pointer;
+}
+
+.container-character-home-selected{
+    border-style: solid;
+    border-color: #FFCD82;
+}
+
 .container-character-home img {
     max-width: 45px;
     max-height: 65px;
@@ -387,10 +397,17 @@ body {
     width: 80px;
     height: 80px;
 }
-.phrase-won-lost {
-    color:#D24E4E;
+.phrase-won-lost{
     text-align: center;
     margin-top: 20px;
+}
+
+.won{
+    color:#4ed281;
+}
+
+.lost{
+    color:#D24E4E;
 }
 
 /*HISTORY*/
