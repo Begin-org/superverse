@@ -12,11 +12,11 @@ if ($response != false) {
 
     $responseArray = [];
     $responseArray["result"] = Character::convertCharacterToAssociativeArray($response);
-    $responseArray["responseStatus"] = SUCCESSUFUL_SEARCH;
+    $responseArray["responseStatus"] = SUCCESSUFUL;
 
     echo json_encode($responseArray);
 } else {
 
-    $responseArray = ["responseStatus" => ERROR_IN_SEARCH];
+    $responseArray = ["responseStatus" => ERROR];
     echo json_encode($responseArray);
 }

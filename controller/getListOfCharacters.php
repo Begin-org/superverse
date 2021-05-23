@@ -15,7 +15,7 @@ if (isset($_GET['listLimit']) && !empty($_GET['listLimit']) ) {
         
         $responseArray = []; 
         $responseArray["result"] = Character::convertArrayOfCharactersToAssociativeArray($response);
-        $responseArray["responseStatus"] = SUCCESSUFUL_SEARCH;
+        $responseArray["responseStatus"] = SUCCESSUFUL;
 
         echo json_encode($responseArray);
 

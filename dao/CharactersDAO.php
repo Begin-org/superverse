@@ -75,12 +75,6 @@ class CharacterDAO
 
     public function getListCharacters($limit)
     {
-        /*$favorite_heroes = [
-            30, 38, 60, 63, 69, 76, 97, 106, 112, 149, 194, 201, 204, 213, 216, 226,
-            233, 263, 278, 280, 298, 306, 309, 332, 346, 356, 367, 368, 370, 405, 423, 432, 441, 443, 491, 514, 528,
-            536, 538, 542, 546, 561, 569, 576, 579, 620, 632, 637, 643, 644, 654, 655, 659, 675, 678,
-            687, 717, 719, 730
-        ];*/
 
         $url = $this->getUrlApi() . "search/a";
         $curl = CurlDAO::getCurl($url);
@@ -95,9 +89,6 @@ class CharacterDAO
             shuffle($response->results);
 
             foreach ($response->results as $result) {
-                /*if (in_array($result->id, $favorite_heroes)) {
-                    array_push($listCharacters, $this->read($result));
-                }*/
 
                 array_push($listCharacters, $this->read($result));
 

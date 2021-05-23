@@ -1,6 +1,7 @@
 <?php
 
-class Character {
+class Character
+{
 
     private $characterId;
     private $characterName;
@@ -13,7 +14,7 @@ class Character {
     private $characterCombat;
     private $publisher;
 
-   
+
     public function getCharacterId()
     {
         return $this->characterId;
@@ -26,7 +27,7 @@ class Character {
         return $this;
     }
 
-     
+
     public function getCharacterName()
     {
         return $this->characterName;
@@ -56,19 +57,19 @@ class Character {
         return $this->characterIntelligence;
     }
 
-    
+
     public function setCharacterIntelligence($characterIntelligence)
     {
         $this->characterIntelligence = $characterIntelligence;
 
         return $this;
     }
- 
+
     public function getCharacterStrength()
     {
         return $this->characterStrength;
     }
- 
+
     public function setCharacterStrength($characterStrength)
     {
         $this->characterStrength = $characterStrength;
@@ -81,7 +82,7 @@ class Character {
         return $this->characterSpeed;
     }
 
-  
+
     public function setCharacterSpeed($characterSpeed)
     {
         $this->characterSpeed = $characterSpeed;
@@ -101,13 +102,13 @@ class Character {
         return $this;
     }
 
-    
+
     public function getCharacterPower()
     {
         return $this->characterPower;
     }
 
-   
+
     public function setCharacterPower($characterPower)
     {
         $this->characterPower = $characterPower;
@@ -119,7 +120,7 @@ class Character {
     {
         return $this->characterCombat;
     }
- 
+
     public function setCharacterCombat($characterCombat)
     {
         $this->characterCombat = $characterCombat;
@@ -131,7 +132,7 @@ class Character {
     {
         return $this->publisher;
     }
- 
+
     public function setPublisher($publisher)
     {
         $this->publisher = $publisher;
@@ -139,34 +140,35 @@ class Character {
         return $this;
     }
 
-    public static function convertArrayOfCharactersToAssociativeArray($arrayOfCharacters) {
+    public static function convertArrayOfCharactersToAssociativeArray($arrayOfCharacters)
+    {
 
         $associativeArray = [];
 
-        foreach($arrayOfCharacters as $character){
+        foreach ($arrayOfCharacters as $character) {
 
             $characterAttributes = [];
-            
+
             $characterAttributes["characterId"] = $character->getCharacterId();
             $characterAttributes["characterName"] = $character->getCharacterName();
             $characterAttributes["characterImage"] = $character->getCharacterImage();
             $characterAttributes["publisher"] = $character->getPublisher();
             $characterAttributes["characterIntelligence"] = ($character->getCharacterIntelligence() != "null") ? $character->getCharacterIntelligence() : 0;
-            $characterAttributes["characterStrength"] = ($character->getCharacterStrength() != "null" ) ? $character->getCharacterStrength(): 0;
+            $characterAttributes["characterStrength"] = ($character->getCharacterStrength() != "null") ? $character->getCharacterStrength() : 0;
             $characterAttributes["characterSpeed"] = ($character->getCharacterSpeed() != "null") ? $character->getCharacterSpeed() : 0;
             $characterAttributes["characterDurability"] = ($character->getCharacterDurability() != "null") ? $character->getCharacterDurability() : 0;
             $characterAttributes["characterPower"] = ($character->getCharacterPower() != "null") ? $character->getCharacterPower() : 0;
             $characterAttributes["characterCombat"] = ($character->getCharacterCombat() != "null") ? $character->getCharacterCombat() : 0;
-    
-            $associativeArray[] = $characterAttributes; 
+
+            $associativeArray[] = $characterAttributes;
         }
 
         return $associativeArray;
-        
     }
-    public static function convertCharacterToAssociativeArray($character) {
+    public static function convertCharacterToAssociativeArray($character)
+    {
 
-        
+
         $characterAttributes = [];
 
         $characterAttributes["characterId"] = $character->getCharacterId();
@@ -174,13 +176,12 @@ class Character {
         $characterAttributes["characterImage"] = $character->getCharacterImage();
         $characterAttributes["publisher"] = $character->getPublisher();
         $characterAttributes["characterIntelligence"] = ($character->getCharacterIntelligence() != "null") ? $character->getCharacterIntelligence() : 0;
-        $characterAttributes["characterStrength"] = ($character->getCharacterStrength() != "null" ) ? $character->getCharacterStrength(): 0;
+        $characterAttributes["characterStrength"] = ($character->getCharacterStrength() != "null") ? $character->getCharacterStrength() : 0;
         $characterAttributes["characterSpeed"] = ($character->getCharacterSpeed() != "null") ? $character->getCharacterSpeed() : 0;
         $characterAttributes["characterDurability"] = ($character->getCharacterDurability() != "null") ? $character->getCharacterDurability() : 0;
         $characterAttributes["characterPower"] = ($character->getCharacterPower() != "null") ? $character->getCharacterPower() : 0;
         $characterAttributes["characterCombat"] = ($character->getCharacterCombat() != "null") ? $character->getCharacterCombat() : 0;
 
         return $characterAttributes;
-
     }
 }

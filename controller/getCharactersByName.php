@@ -15,7 +15,7 @@ if (isset($_GET['characterName']) && !empty($_GET['characterName'])) {
         
         $responseArray = []; 
         $responseArray["result"] = Character::convertArrayOfCharactersToAssociativeArray($response);
-        $responseArray["responseStatus"] = SUCCESSUFUL_SEARCH;
+        $responseArray["responseStatus"] = SUCCESSUFUL;
 
         echo json_encode($responseArray);
 

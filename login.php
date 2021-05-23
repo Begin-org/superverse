@@ -7,7 +7,7 @@
     <title>Superverse</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -107,71 +107,71 @@
         </ul>
 
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
     </script>
-</body>
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+    // web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyAbd-3X4XFhga065LxJ-iWM2Bj4zlJd3Q0",
+        authDomain: "superverse-848e8.firebaseapp.com",
+        projectId: "superverse-848e8",
+        storageBucket: "superverse-848e8.appspot.com",
+        messagingSenderId: "456816756668",
+        appId: "1:456816756668:web:cee0d9017e8c5b1e8f4db9"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var provider = new firebase.auth.GoogleAuthProvider();
 
-<!-- firebase -->
-<script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
+    $("#login-google").click(function() {
 
+        firebase.auth()
+            .signInWithPopup(provider)
+            .then((result) => {
+                /** @type {firebase.auth.OAuthCredential} */
+                var credential = result.credential;
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
 
-<script>
-// web app's Firebase configuration
-var firebaseConfig = {
-    apiKey: "AIzaSyAbd-3X4XFhga065LxJ-iWM2Bj4zlJd3Q0",
-    authDomain: "superverse-848e8.firebaseapp.com",
-    projectId: "superverse-848e8",
-    storageBucket: "superverse-848e8.appspot.com",
-    messagingSenderId: "456816756668",
-    appId: "1:456816756668:web:cee0d9017e8c5b1e8f4db9"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-var provider = new firebase.auth.GoogleAuthProvider();
+                $.ajax({
+                    url: "utils/storeUid.php",
+                    method: "POST",
+                    data: {
+                        uid: user.uid
+                    },
+                    dataType: "json"
+                }).done(function() {
+                    location.href = "home.php";
+                }).fail(function(jqXHR, textStatus, msg) {
+                    console.log(msg);
+                });
 
-$("#login-google").click(function() {
-
-    firebase.auth()
-        .signInWithPopup(provider)
-        .then((result) => {
-            /** @type {firebase.auth.OAuthCredential} */
-            var credential = result.credential;
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            var token = credential.accessToken;
-            // The signed-in user info.
-            var user = result.user;
-
-            $.ajax({
-                url: "utils/storeUid.php",
-                method: "POST",
-                data: { uid : user.uid },
-                dataType: "json"
-            }).done(function(){
-                location.href = "home.php";
-            }).fail(function(jqXHR, textStatus, msg){
-                console.log(msg);
+                // ...
+            }).catch((error) => {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ...
+                console.log(errorMessage);
             });
-           
-            // ...
-        }).catch((error) => {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // The email of the user's account used.
-            var email = error.email;
-            // The firebase.auth.AuthCredential type that was used.
-            var credential = error.credential;
-            // ...
-            console.log(errorMessage);
-        });
-});
-</script>
+    });
+    </script>
+</body>
 
 </html>

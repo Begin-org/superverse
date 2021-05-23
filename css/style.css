@@ -39,6 +39,10 @@ body {
     position: absolute;
     transform: translateX(-50%);
   }
+
+  .loader-centered{
+      bottom: 50%;
+  }
   
   @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }

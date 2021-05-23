@@ -87,13 +87,16 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="utils/responseConstants.js"></script>
     <script src="js/requestsToSuperHeroApi.js"></script>
+    <script src="js/requestsToSuperverseApi.js"></script>
+    <script src="utils/skillTranslation.js"></script>
 
     <script>
     let selectedHero = null;
@@ -101,7 +104,7 @@
     async function modalVs(skill) {
         if (skill == "random") {
             skill = ["Intelligence", "Strength", "Speed", "Power", "Durability", "Combat"][Math.floor(Math
-            .random() *
+                .random() *
                 6)];
 
             await getRandomCharacter().then((userHero) => {
@@ -111,37 +114,42 @@
 
         await getRandomCharacter().then((opposing) => {
 
-            let skillTranslation = "";
-
-            if(skill == "Intelligence"){skillTranslation="Inteligência";}
-            if(skill == "Strength"){skillTranslation="Força";}
-            if(skill == "Speed"){skillTranslation="Velocidade";}
-            if(skill == "Power"){skillTranslation="Poder";}
-            if(skill == "Durability"){skillTranslation="Durabilidade";}
-            if(skill == "Combat"){skillTranslation="Combate";}
+            let idWinner = 0;
+            let idLoser = 0;
 
             $(".image-chosen-character").attr("src", selectedHero.characterImage);
             $(".name-chosen").html(selectedHero.characterName);
-            $(".skill-chosen").html(`${skillTranslation}: ${selectedHero[`character${skill}`]}`);
+            $(".skill-chosen").html(`${skillTranslation(skill)}: ${selectedHero[`character${skill}`]}`);
 
             $(".image-opposing-character").attr("src", opposing.characterImage);
             $(".name-opposing").html(opposing.characterName);
-            $(".skill-opposing").html(`${skillTranslation}: ${opposing[`character${skill}`]}`);
-
+            $(".skill-opposing").html(`${skillTranslation(skill)}: ${opposing[`character${skill}`]}`);
 
             if (Number(opposing[`character${skill}`]) > Number(selectedHero[`character${skill}`])) {
                 $(".phrase-won-lost").html("Você perdeu!");
                 $(".phrase-won-lost").removeClass("won");
                 $(".phrase-won-lost").addClass("lost");
+
+                idWinner = opposing.characterId;
+                idLoser = selectedHero.characterId;
+
             } else if (Number(selectedHero[`character${skill}`]) > Number(opposing[`character${skill}`])) {
                 $(".phrase-won-lost").html("Você ganhou!");
                 $(".phrase-won-lost").removeClass("lost");
                 $(".phrase-won-lost").addClass("won");
+
+                idWinner = selectedHero.characterId;
+                idLoser = opposing.characterId;
+
             } else {
                 $(".phrase-won-lost").html("Empate!");
                 $(".phrase-won-lost").removeClass("lost");
                 $(".phrase-won-lost").addClass("won");
             }
+
+            createBattle(idWinner, idLoser, selectedHero.characterId, skill).then((response) => {
+
+            }).catch(err => console.log(err));
 
         }).catch(err => console.log(err));
 
