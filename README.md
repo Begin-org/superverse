@@ -20,6 +20,11 @@ as informações necessárias dos personagens.
 
 <h2>Diagramas 📁</h2>
 
+![classes](https://user-images.githubusercontent.com/45825131/123525600-4ecf7280-d6a8-11eb-83fd-1be33bf88d1b.png)
+![sequencia_Batalha](https://user-images.githubusercontent.com/45825131/123525598-4aa35500-d6a8-11eb-8fdb-aec39c3891f1.png)
+![sequencia_Histórico](https://user-images.githubusercontent.com/45825131/123525599-4b3beb80-d6a8-11eb-85ec-6026ac474487.png)
+
+
 
 
 
