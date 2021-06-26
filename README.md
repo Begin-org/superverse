@@ -8,8 +8,8 @@
 
 Superverse é um jogo de cartas que compara a habilidades de personagens e cria históricos de batalhas. 
 Ele consome duas API's, sendo uma API própria e a outra de terceiros. A nossa API 
-(<a href="https://www.superheroapi.com/" target="_blank">Superverse API</a>) guarda o registro de batalhas,
-enquanto a API de terceiros (<a href="https://github.com/Begin-org/superverse_api" target="_blank">Super Hero API</a>) retorna
+(<a href="https://github.com/Begin-org/superverse_api" target="_blank">Superverse API</a>) guarda o registro de batalhas,
+enquanto a API de terceiros (<a href="https://www.superheroapi.com/" target="_blank">Super Hero API</a>) retorna
 as informações necessárias dos personagens.
 
 <h2>Layout 🎨</h2>
